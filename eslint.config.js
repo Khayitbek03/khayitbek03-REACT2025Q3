@@ -17,6 +17,12 @@ export default tseslint.config([
       reactRefresh.configs.vite,
       prettier,
     ],
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      'react-compiler': reactCompiler,
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
