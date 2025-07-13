@@ -1,6 +1,5 @@
 import { Component, type ChangeEvent } from 'react';
 import './App.css';
-import ErrorBoundary from './components/ErrorBoundary';
 import SearchBar from './components/SearchBar';
 import Loader from './components/Loader';
 import CardList from './components/CardList';
@@ -21,7 +20,7 @@ type State = {
 
 const LOCAL_STORAGE_KEY = 'search-term';
 
-export default class App extends Component<{}, State> {
+export default class App extends Component<Record<string, never>, State> {
   state: State = {
     searchTerm: '',
     items: [],
@@ -52,7 +51,6 @@ export default class App extends Component<{}, State> {
       const term = this.state.searchTerm;
 
       if (term) {
-        // Fetch one Pokémon by name
         const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${term}`,
         );
@@ -66,7 +64,6 @@ export default class App extends Component<{}, State> {
         };
         this.setState({ items: [item], loading: false });
       } else {
-        // No term → fetch first 10 Pokémon
         const response = await fetch(
           'https://pokeapi.co/api/v2/pokemon?offset=0&limit=10',
         );
@@ -109,25 +106,23 @@ export default class App extends Component<{}, State> {
     }
 
     return (
-      <ErrorBoundary>
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
-          <SearchBar
-            value={searchTerm}
-            onChange={this.handleInputChange}
-            onSearch={this.handleSearchClick}
-          />
+      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+        <SearchBar
+          value={searchTerm}
+          onChange={this.handleInputChange}
+          onSearch={this.handleSearchClick}
+        />
 
-          <div style={{ marginTop: '30px' }}>
-            {loading && <Loader />}
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-            {!loading && !error && <CardList items={items} />}
-          </div>
-
-          <div style={{ marginTop: '30px' }}>
-            <button onClick={this.throwError}>Trigger Error</button>
-          </div>
+        <div style={{ marginTop: '30px' }}>
+          {loading && <Loader />}
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+          {!loading && !error && <CardList items={items} />}
         </div>
-      </ErrorBoundary>
+
+        <div style={{ marginTop: '30px' }}>
+          <button onClick={this.throwError}>Trigger Error</button>
+        </div>
+      </div>
     );
   }
 }
