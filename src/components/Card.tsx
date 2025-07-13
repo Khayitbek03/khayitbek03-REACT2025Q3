@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 type Props = {
   name: string;
@@ -11,18 +11,10 @@ export default class Card extends Component<Props> {
     const { name, height, weight } = this.props;
 
     return (
-      <div
-        style={{
-          border: '1px solid #ccc',
-          borderRadius: '8px',
-          margin: '12px 0',
-          padding: '12px',
-          backgroundColor: '#f9f9f9',
-        }}
-      >
-        <h3 style={{ margin: '0 0 8px 0' }}>{name}</h3>
-        <p style={{ margin: 0 }}>Height: {height}</p>
-        <p style={{ margin: 0 }}>Weight: {weight}</p>
+      <div className="card">
+        <h3 className="card__name">{name}</h3>
+        <p className="card__info">Height: {height}</p>
+        <p className="card__info">Weight: {weight}</p>
       </div>
     );
   }

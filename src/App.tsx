@@ -106,21 +106,23 @@ export default class App extends Component<Record<string, never>, State> {
     }
 
     return (
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+      <div className="app-container">
         <SearchBar
           value={searchTerm}
           onChange={this.handleInputChange}
           onSearch={this.handleSearchClick}
         />
 
-        <div style={{ marginTop: '30px' }}>
+        <div className="app-results">
           {loading && <Loader />}
-          {error && <div style={{ color: 'red' }}>{error}</div>}
+          {error && <div className="app-error">{error}</div>}
           {!loading && !error && <CardList items={items} />}
         </div>
 
-        <div style={{ marginTop: '30px' }}>
-          <button onClick={this.throwError}>Trigger Error</button>
+        <div>
+          <button className="app-error-trigger" onClick={this.throwError}>
+            Trigger Error
+          </button>
         </div>
       </div>
     );

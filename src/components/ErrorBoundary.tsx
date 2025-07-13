@@ -24,42 +24,13 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (this.state.hasError) {
       return (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 9999,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: '#fff',
-              padding: '30px',
-              borderRadius: '10px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
-              color: '#000',
-              maxWidth: '400px',
-              textAlign: 'center',
-              fontSize: '18px',
-            }}
-          >
+        <div className="error-boundary">
+          <div className="error-boundary__modal">
             <p>The intentional error happened!</p>
             <p>Try to reload the page.</p>
             <button
+              className="error-boundary__button"
               onClick={() => window.location.reload()}
-              style={{
-                marginTop: '20px',
-                padding: '10px 20px',
-                fontSize: '16px',
-                cursor: 'pointer',
-              }}
             >
               Reload
             </button>

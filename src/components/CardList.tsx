@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Card from './Card';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 export default class CardList extends Component<Props> {
   render() {
     return (
-      <div>
+      <div className="card-list">
         {this.props.items.map((item, index) => (
           <Card
             key={index}
