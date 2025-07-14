@@ -1,6 +1,10 @@
 import { Component } from 'react';
-import type { Props } from '../types';
 
+type Props = {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearch: () => void;
+};
 export default class SearchBar extends Component<Props> {
   render() {
     return (
