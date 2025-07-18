@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1752747307743" clover="3.2.0">
-  <project timestamp="1752747307743" name="All files">
+<coverage generated="1752818182482" clover="3.2.0">
+  <project timestamp="1752818182483" name="All files">
     <metrics statements="189" coveredstatements="46" conditionals="8" coveredconditionals="4" methods="7" coveredmethods="3" elements="204" coveredelements="53" complexity="0" loc="189" ncloc="189" packages="2" files="7" classes="7"/>
     <package name="src">
       <metrics statements="108" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
@@ -126,14 +126,14 @@
         <line num="1" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
-        <line num="18" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
       </file>
       <file name="CardList.tsx" path="C:\Users\Jokhongir\OneDrive\Desktop\rs_2024\khayitbek03-REACT2025Q3\src\components\CardList.tsx">
@@ -142,18 +142,18 @@
         <line num="2" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="1" falsecount="0"/>
         <line num="13" count="2" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="17" count="2" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
       </file>
       <file name="ErrorBoundary.tsx" path="C:\Users\Jokhongir\OneDrive\Desktop\rs_2024\khayitbek03-REACT2025Q3\src\components\ErrorBoundary.tsx">
