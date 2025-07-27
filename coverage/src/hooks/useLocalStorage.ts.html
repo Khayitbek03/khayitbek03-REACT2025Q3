@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/CardList.tsx</title>
+    <title>Code coverage report for src/hooks/useLocalStorage.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> CardList.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/hooks</a> useLocalStorage.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>12/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>12/24</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,57 +89,60 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Card from './Card';
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useState } from 'react';
 &nbsp;
-type Props = {
-  items: { name: string; height: number; weight: number }[];
-  onSelect: (name: string) =&gt; void;
-};
+export function useLocalStorage&lt;T&gt;(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState&lt;T&gt;(() =&gt; {
+    try {
+      const item = localStorage.getItem(key);
+      if (item !== null) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >        return JSON.parse(item) as T;</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+      return initialValue;
+<span class="branch-0 cbranch-no" title="branch not covered" >    } catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >      console.error(`Error reading localStorage key "${key}":`, error);</span>
+<span class="cstat-no" title="statement not covered" >      return initialValue;</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+  });
 &nbsp;
-export default function CardList({ items, onSelect }: Props) {
-  if (items.length === 0) {
-    return &lt;p&gt;No results found.&lt;/p&gt;;
-  }
+  const setValue = <span class="fstat-no" title="function not covered" >(value: T) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      setStoredValue(value);</span>
+<span class="cstat-no" title="statement not covered" >      localStorage.setItem(key, JSON.stringify(value));</span>
+<span class="cstat-no" title="statement not covered" >    } catch (error) {</span>
+<span class="cstat-no" title="statement not covered" >      console.error(`Error setting localStorage key "${key}":`, error);</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 &nbsp;
-  return (
-    &lt;div className="card-list"&gt;
-      {items.map((item, index) =&gt; (
-        &lt;div
-          key={index}
-          onClick={<span class="fstat-no" title="function not covered" >() =&gt; onSelect(item.name)}</span>
-          style={{ cursor: 'pointer' }}
-        &gt;
-          &lt;Card name={item.name} height={item.height} weight={item.weight} /&gt;
-        &lt;/div&gt;
-      ))}
-    &lt;/div&gt;
-  );
+  return [storedValue, setValue] as const;
 }
 &nbsp;</pre></td></tr></table></pre>
 
