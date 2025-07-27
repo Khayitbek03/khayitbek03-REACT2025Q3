@@ -1,8 +1,10 @@
-import { Component, type ChangeEvent } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState, type ChangeEvent } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import Loader from './components/Loader';
 import CardList from './components/CardList';
+import { useLocalStorage } from './useLocalStorage';
 
 type Pokemon = {
   name: string;
@@ -10,45 +12,22 @@ type Pokemon = {
   weight: number;
 };
 
-type State = {
-  searchTerm: string;
-  items: Pokemon[];
-  loading: boolean;
-  error: string | null;
-  simulateError: boolean;
-};
+export default function App() {
+  const [searchTerm, setSearchTerm] = useLocalStorage<string>(
+    'search-term',
+    '',
+  );
+  const [items, setItems] = useState<Pokemon[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [simulateError, setSimulateError] = useState(false);
 
-const LOCAL_STORAGE_KEY = 'search-term';
-
-export default class App extends Component<Record<string, never>, State> {
-  state: State = {
-    searchTerm: '',
-    items: [],
-    loading: false,
-    error: null,
-    simulateError: false,
-  };
-
-  componentDidMount(): void {
-    const savedTerm = localStorage.getItem(LOCAL_STORAGE_KEY) || '';
-    this.setState({ searchTerm: savedTerm }, this.fetchPokemon);
-  }
-
-  handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchTerm: e.target.value });
-  };
-
-  handleSearchClick = () => {
-    const trimmed = this.state.searchTerm.trim().toLowerCase();
-    localStorage.setItem(LOCAL_STORAGE_KEY, trimmed);
-    this.setState({ searchTerm: trimmed }, this.fetchPokemon);
-  };
-
-  fetchPokemon = async () => {
-    this.setState({ loading: true, error: null });
+  const fetchPokemon = async () => {
+    setLoading(true);
+    setError(null);
 
     try {
-      const term = this.state.searchTerm;
+      const term = searchTerm.trim().toLowerCase();
 
       if (term) {
         const response = await fetch(
@@ -57,12 +36,9 @@ export default class App extends Component<Record<string, never>, State> {
         if (!response.ok) throw new Error(`API Error: ${response.status}`);
 
         const data = await response.json();
-        const item: Pokemon = {
-          name: data.name,
-          height: data.height,
-          weight: data.weight,
-        };
-        this.setState({ items: [item], loading: false });
+        setItems([
+          { name: data.name, height: data.height, weight: data.weight },
+        ]);
       } else {
         const response = await fetch(
           'https://pokeapi.co/api/v2/pokemon?offset=0&limit=10',
@@ -83,48 +59,55 @@ export default class App extends Component<Record<string, never>, State> {
           }),
         );
 
-        this.setState({ items: results, loading: false });
+        setItems(results);
       }
     } catch (error) {
       console.error('API fetch failed:', error);
-      this.setState({
-        error: 'Failed to load Pokémon data. Please try again later.',
-        loading: false,
-      });
+      setError('Failed to load Pokémon data. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
-  throwError = () => {
-    this.setState({ simulateError: true });
+  useEffect(() => {
+    fetchPokemon();
+  }, [searchTerm]);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
-  render() {
-    const { searchTerm, items, loading, error, simulateError } = this.state;
+  const handleSearchClick = () => {
+    setSearchTerm(searchTerm.trim().toLowerCase());
+  };
 
-    if (simulateError) {
-      throw new Error('Manually triggered error');
-    }
+  const throwError = () => {
+    setSimulateError(true);
+  };
 
-    return (
-      <div className="app-container">
-        <SearchBar
-          value={searchTerm}
-          onChange={this.handleInputChange}
-          onSearch={this.handleSearchClick}
-        />
-
-        <div className="app-results">
-          {loading && <Loader />}
-          {error && <div className="app-error">{error}</div>}
-          {!loading && !error && <CardList items={items} />}
-        </div>
-
-        <div>
-          <button className="app-error-trigger" onClick={this.throwError}>
-            Trigger Error
-          </button>
-        </div>
-      </div>
-    );
+  if (simulateError) {
+    throw new Error('Manually triggered error');
   }
+
+  return (
+    <div className="app-container">
+      <SearchBar
+        value={searchTerm}
+        onChange={handleInputChange}
+        onSearch={handleSearchClick}
+      />
+
+      <div className="app-results">
+        {loading && <Loader />}
+        {error && <div className="app-error">{error}</div>}
+        {!loading && !error && <CardList items={items} />}
+      </div>
+
+      <div>
+        <button className="app-error-trigger" onClick={throwError}>
+          Trigger Error
+        </button>
+      </div>
+    </div>
+  );
 }

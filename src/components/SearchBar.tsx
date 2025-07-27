@@ -1,25 +1,24 @@
-import { Component } from 'react';
+import type { ChangeEvent } from 'react';
 
 type Props = {
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSearch: () => void;
 };
-export default class SearchBar extends Component<Props> {
-  render() {
-    return (
-      <div className="search-bar">
-        <input
-          type="text"
-          className="search-bar__input"
-          value={this.props.value}
-          onChange={this.props.onChange}
-          placeholder="Search by name ..."
-        />
-        <button className="search-bar__button" onClick={this.props.onSearch}>
-          Search
-        </button>
-      </div>
-    );
-  }
+
+export default function SearchBar({ value, onChange, onSearch }: Props) {
+  return (
+    <div className="search-bar">
+      <input
+        type="text"
+        className="search-bar__input"
+        value={value}
+        onChange={onChange}
+        placeholder="Search by name ..."
+      />
+      <button className="search-bar__button" onClick={onSearch}>
+        Search
+      </button>
+    </div>
+  );
 }
