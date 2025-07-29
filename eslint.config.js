@@ -17,7 +17,7 @@ export default tseslint.config([
       reactRefresh.configs.vite,
       prettier,
     ],
-     plugins: {
+    plugins: {
       import: eslintPluginImport,
     },
     languageOptions: {
@@ -30,7 +30,7 @@ export default tseslint.config([
     settings: {
       'import/resolver': {
         typescript: {},
-      }
-}
+      },
+    },
   },
 ]);
