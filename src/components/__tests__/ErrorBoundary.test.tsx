@@ -10,7 +10,7 @@ describe('ErrorBoundary component', () => {
   it('catches error and display fallback UI', () => {
     render(
       <ErrorBoundary>
-        <ShowError></ShowError>
+        <ShowError />
       </ErrorBoundary>,
     );
     expect(
