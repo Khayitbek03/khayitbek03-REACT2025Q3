@@ -38,7 +38,7 @@ describe('App Component', () => {
     });
   });
 
-  it('searches and showss a specific pokemon when user submits search', async () => {
+  it('searches and shows a specific pokemon when user submits search', async () => {
     const mockDefaultList = {
       results: [],
     };
