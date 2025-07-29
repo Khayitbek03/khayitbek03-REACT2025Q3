@@ -30,7 +30,7 @@ describe('App Component', () => {
       .mockResolvedValueOnce({ ok: true, json: async () => mockedListResponse })
       .mockResolvedValueOnce({ ok: true, json: async () => mockPokemonDetail });
 
-    render(<App></App>);
+    render(<App />);
 
     expect(screen.getByPlaceholderText(/search by name/i)).toBeInTheDocument();
     await waitFor(() => {
@@ -60,7 +60,7 @@ describe('App Component', () => {
       json: async () => mockPokemon,
     });
 
-    render(<App></App>);
+    render(<App />);
 
     const input = screen.getByPlaceholderText(/search by name/i);
     const button = screen.getByRole('button', { name: /search/i });
@@ -84,7 +84,7 @@ describe('App Component', () => {
       status: 404,
     });
 
-    render(<App></App>);
+    render(<App />);
 
     await waitFor(() => {
       expect(
