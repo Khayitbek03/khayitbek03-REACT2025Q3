@@ -30,7 +30,10 @@ export default class ErrorBoundary extends Component<Props, State> {
             <p>Try to reload the page.</p>
             <button
               className="error-boundary__button"
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                localStorage.removeItem('search-term');
+                window.location.reload();
+              }}
             >
               Reload
             </button>
