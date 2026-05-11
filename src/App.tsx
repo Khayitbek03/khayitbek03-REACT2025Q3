@@ -41,11 +41,11 @@ export default class App extends Component<Record<string, never>, State> {
   handleSearchClick = () => {
     const trimmed = this.state.searchTerm.trim().toLowerCase();
     const currentSaved = localStorage.getItem(LOCAL_STORAGE_KEY) || '';
-    
+
     if (trimmed === currentSaved) {
       return;
     }
-    
+
     localStorage.setItem(LOCAL_STORAGE_KEY, trimmed);
     this.setState({ searchTerm: trimmed }, this.fetchPokemon);
   };
