@@ -1,39 +1,42 @@
-/// <reference types="vitest/globals" />
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+/* eslint-disable import/no-unresolved */
+import { describe, it, expect, vi } from 'vitest';
+import { screen, fireEvent } from '@testing-library/react';
 import SearchBar from '../SearchBar';
-import { vi } from 'vitest';
+import { renderWithRouter } from '../../test-utils';
 
 describe('SearchBar Component', () => {
   it('renders input and button', () => {
-    render(<SearchBar value="" onChange={vi.fn()} onSearch={vi.fn()} />);
+    renderWithRouter(
+      <SearchBar value="" onChange={() => {}} onSearch={() => {}} />,
+    );
     expect(screen.getByPlaceholderText(/search by name/i)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
   it('displays the correct input value', () => {
-    render(<SearchBar value="pikachu" onChange={vi.fn()} onSearch={vi.fn()} />);
+    renderWithRouter(
+      <SearchBar value="pikachu" onChange={() => {}} onSearch={() => {}} />,
+    );
     expect(screen.getByDisplayValue('pikachu')).toBeInTheDocument();
   });
 
-  it('calls onChange when typing in input', async () => {
+  it('calls onChange when typing in input', () => {
     const handleChange = vi.fn();
-    render(<SearchBar value="" onChange={handleChange} onSearch={vi.fn()} />);
-    const input = screen.getByPlaceholderText(/search by name/i);
-
-    await userEvent.type(input, 'bulbasaur');
-
-    expect(handleChange).toHaveBeenCalled();
-    expect(handleChange).toHaveBeenCalledTimes('bulbasaur'.length);
+    renderWithRouter(
+      <SearchBar value="" onChange={handleChange} onSearch={() => {}} />,
+    );
+    fireEvent.change(screen.getByPlaceholderText(/search by name/i), {
+      target: { value: 'bulbasaur' },
+    });
+    expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
-  it('calls onSearch when clicking the search button', async () => {
+  it('calls onSearch when clicking the search button', () => {
     const handleSearch = vi.fn();
-    render(<SearchBar value="" onChange={vi.fn()} onSearch={handleSearch} />);
-    const button = screen.getByRole('button', { name: /search/i });
-
-    await userEvent.click(button);
-
+    renderWithRouter(
+      <SearchBar value="" onChange={() => {}} onSearch={handleSearch} />,
+    );
+    fireEvent.click(screen.getByRole('button', { name: /search/i }));
     expect(handleSearch).toHaveBeenCalledTimes(1);
   });
 });
